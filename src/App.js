@@ -1,26 +1,17 @@
 import './App.scss';
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Pomodoro from './components/Pomodoro.js'
 import Quote from './components/Quote.js'
 import Todo from './components/Todo.js'
 
 const Test = ({name, clickEvent}) => {
   return (
-    <><li onClick={clickEvent}>{name}</li></>
+    <>
+    <li className="nav-list" onClick={clickEvent}>{name}</li>
+    </>
   )
-}
-
-const Hello = ({container}) => {
-  if(container === true) {
-    return <h1>Hello!</h1>
   }
-}
 
-const Test2 = ({container}) => {
-  if(container === true) {
-    return <h1>Hello 2  !</h1>
-  }
-}
 
 const App = () => {
   const [pomodoro_cont, setPomodoro_cont] = useState(false)
@@ -32,12 +23,20 @@ const App = () => {
       id: 1
     }, 
     {
-      name: 'Todo', 
+      name: 'To-do', 
       id: 2, 
     }, 
     {
       name: 'Quote',
       id: 3
+    }, 
+    {
+      name: 'Reminder',
+      id: 4
+    }, 
+    {
+      name: 'Sound', 
+      id: 5
     }
   ]
   const handleContainer = (curr_container) => {
@@ -47,21 +46,21 @@ const App = () => {
       break;
 
       case 2: 
-      setQuote_cont(!quote_cont)
+      setTodo_cont(!todo_cont)
       break;
 
       case 3: 
-      setTodo_cont(!todo_cont)
+      setQuote_cont(!quote_cont)
       break; 
 
       default: 
-        alert('Invalid!')
+        alert('Empty!')
     }
 
   }
 
   return (
-    <>
+    <main>
     <nav>
       <ul className="nav-bar">
         {navBar.map((option) => {
@@ -74,9 +73,10 @@ const App = () => {
         })}
       </ul>
     </nav>
-    <Hello container={pomodoro_cont}/>
-    <Test2 container={quote_cont}/>
-    </>
+    <Todo container={todo_cont}/>
+    <Quote container={quote_cont}/>
+    <Pomodoro container={pomodoro_cont}/>
+</main>
     
 
   )

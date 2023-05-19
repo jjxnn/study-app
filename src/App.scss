@@ -1,0 +1,219 @@
+$bg-option1:linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+$bg-option2:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Asap&display=swap');
+
+
+/* Mixins */ 
+
+@mixin glass {
+	background: rgba(255, 255, 255, 0.15);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@mixin pomodoro-btn {
+		margin: 1em;
+		padding: 1em;
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.3);
+		transition: 0.4s;
+		&:hover {
+			transform: translateY(-1px);
+			box-shadow: 5px 5px 2px 1px  rgba(242,230,234,0.5);
+		  }
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	color: white;
+	font-family: 'Asap', sans-serif;
+}
+
+*:focus {
+	outline: none;
+}
+main {
+    background: $bg-option2;
+    background-size: 400% 400%;
+	height: 100vh;
+    animation: gradient 12s ease infinite;
+	position: relative;
+}
+
+input, button {
+	border: none;
+	background: none;
+}
+
+
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.nav-bar {
+	list-style-type: none;
+	z-index: 1;
+	width: fit-content;
+	padding: 1em;
+	border-radius: 2rem;
+	position: absolute;
+	bottom: 5%;
+	left: 38%;
+	@include glass;
+	.nav-list {
+		color: white;
+		margin: 1em;
+		padding: 1em;
+		font-family: 'Asap', sans-serif;
+		display: inline;
+		cursor: pointer;
+		user-select: none;
+	}
+}
+
+
+.quote-container {
+	border-left: 3px solid rgba(255, 255, 255, 0.7);
+	margin-top: 1rem;
+	margin-left: 1rem;
+	max-width: 75ch;
+	.mini-title, .quote {
+		padding: 1em;
+	}
+
+	.mini-title {
+		color: rgba(255, 255, 255, 0.9)
+	}
+}
+
+.todo-container {
+	@include glass;
+	width: fit-content;
+	border-radius: 16px;
+	gap: 2em;
+	padding: 1rem;
+	.input-box {
+	border-radius: 2rem;
+	background: rgba(255, 255, 255, 0.3);
+	padding: 0.7rem;
+	width: 35ch;
+	display: inline-block;
+	}
+
+	.add-btn {
+		display: inline-block;
+		position: relative;
+		border-radius: 50%;
+		font-size: 2rem;
+		height: 45px;
+		width: 45px;
+		margin-left: 5px;
+		cursor: pointer;
+		background: rgba(255, 255, 255, 0.3);
+
+		span {
+			position: absolute;
+			top: 0;
+			right: 30%;
+		}
+	}
+
+	.note-tracker {
+		text-align: center;
+	}
+
+}
+
+.test {
+	div {
+		display: inline-block;
+	}
+}
+
+.note-box {
+	border-radius: 2rem;
+	background: rgba(255, 255, 255, 0.3);
+	padding: 0.5rem;
+	position: relative;
+	width: 35ch;
+	margin: 1em 0 1em 0;
+
+	.del-btn {
+		position: absolute;
+		right: 5%;
+		bottom: 15%;
+	}
+
+	.todo-text {
+		padding: 5px;
+	}
+
+	.check-box {
+		appearance: none;
+		background-color: #fafafa;
+		padding: 5.5px;
+		border-radius: 1rem;
+		cursor: pointer;
+		transition: 0.5s ease-in;
+	}
+
+	.check-box:checked {
+		background-color: #8ac926;
+	}
+}
+
+
+.pomodoro-container {
+	@include glass;
+	border-radius: 16px;
+	width: fit-content;
+	padding: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.toggle-time {
+	li {
+		display: inline-block;
+		@include pomodoro-btn;
+		  
+	}
+}
+
+.clock-display {
+	margin: 10px;
+	text-align: center;
+	font-size: 3rem;
+}
+
+.toggle {
+	transform: translateY(-1px);
+	box-shadow: 5px 5px 2px 1px  rgba(242,230,234,0.5);
+}
+
+
+.btn-container {
+	display: flex;
+	flex-direction: row;
+	.start-btn {
+	@include pomodoro-btn;
+	font-size: 1rem;
+  	width: 20ch;
+}
+}
