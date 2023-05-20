@@ -1,14 +1,8 @@
-import React, { useState, useRef } from 'react'
+import React, {useState} from 'react'
 import trashbin from '../img/trashbin.svg'
+import { motion } from 'framer-motion'
+import { v4 as uuidv4 } from 'uuid';
 
-const Title = ({name}) => {
-    return (
-      <div className="title">
-      <h1>{name}</h1>
-      </div>
-    )
-  }
-  
   const Note = ({input, handleInputChange, addNote}) => {
     return (
       <div className="test">
@@ -19,13 +13,13 @@ const Title = ({name}) => {
     )
   }
 
-  const List = ({input, deleteNote, crossNote, labelRef, editdisable}) => {
+  const List = ({input, deleteNote, crossNote}) => {
     return (
       <>
       {input.map((note => <div key={note.id} className="note-box">
-        <input type="checkbox" className="check-box" onClick={() => crossNote({editdisable})}/>
-        <span contentEditable="true" suppressContentEditableWarning={true} className="todo-text" ref={labelRef} spellCheck="false">{note.value}</span>
-        <button onClick={() => deleteNote(note.value)} className="del-btn"><img src={trashbin}/></button>
+        <input type="checkbox" className="check-box" onClick={() => crossNote(note)}/>
+        <span contentEditable="true" suppressContentEditableWarning={true} className={note.checked === true ? "todo-text-crossed" : "todo-text"} spellCheck="false"> {note.value}</span>
+        <button onClick={() => deleteNote(note)} className="del-btn"><img src={trashbin}/></button>
         </div>))}
       </>
       
@@ -35,69 +29,67 @@ const Title = ({name}) => {
   const Count = ({noteCount, completeNote}) => {
     return (
       <>
-        <small className="note-tracker">{completeNote} out of {noteCount} task completed</small>    
+        <small className="note-tracker"> {completeNote} out of {noteCount} task completed</small>    
       </>
     )
   }
 
-
 const Todo = ({container}) => {
-    const [input, setInput] = useState('')
+  const [input, setInput] = useState('')
   const [countNote, setcountNote] = useState(0)
   const [completeNote, setcompleteNote] = useState(0)
   const [notes, setNotes] = useState([])
-  let ref = React.createRef()
-  const [checked, setChecked] = useState(false) 
-
   const handleInputChange = (e) => {
     setInput(e.target.value)
   }
 
   const addNote = (e) => {
     e.preventDefault()
-    if(input !== '') {
       const noteObject = {
         value: input, 
-        id: notes.length + 1,
-        checked: false 
+        id: uuidv4(),
+        checked: false
       }
       setNotes([...notes, noteObject])
       setcountNote(countNote + 1)
-    } else {
-      alert('Cannot enter empty string')
-    }
     setInput('')
   }
-  // Pass in the current note value 
+
+
   const delNote = (note) => {
       const currentnote = note;
-      setNotes(notes.filter(note => note.value !== currentnote))
+      // Return a new array that doesn't have the current note. 
+      setNotes(notes.filter(note => note !== currentnote))
       setcountNote(countNote - 1)
+      if(completeNote >= 1) {
+        setcompleteNote(completeNote - 1)
+      }
   }
 
-  const crossNote = () => {
-    if(checked === false) {
-      ref.current.style.textDecoration = 'line-through'
-      setcompleteNote(completeNote + 1 )
-    } else {
-      ref.current.style.textDecoration = 'none'
-      setcompleteNote(completeNote - 1)
+ const crossNote = (currNote) => {
+  let array = notes.map(crossNote => {
+    if(crossNote.id === currNote.id) {
+      return {...crossNote, checked: !crossNote.checked}
     }
-
-    setChecked(!checked)
-  }
+    return crossNote
+  })
+  setNotes(array)
+  if(currNote.checked === false) {
+    setcompleteNote(completeNote + 1)
+  } else {setcompleteNote(completeNote - 1)}
+ }
 
   if(container === true) {
     return(
-      <section className="todo-container">
+      <motion.div className="todo-container" drag dragConstraints={{ left: 0, top: 0, right: (window.innerWidth * 80) / 100, bottom: (window.innerHeight * 80) / 100}}>
         <div >
           <small className="mini-title">&#x270D; To-do List</small>
         <Note input={input} handleInputChange={handleInputChange} addNote={addNote}/>
         {/* Passing ref into the List components, then using it to access in the main component  */}
-        <List input={notes} deleteNote={delNote} crossNote={crossNote} labelRef={ref}/>
+        <List input={notes} deleteNote={delNote} crossNote={crossNote}/>
         <Count noteCount={countNote} completeNote={completeNote}/>
       </div>
-      </section>
+      </motion.div>
         
     )
   }

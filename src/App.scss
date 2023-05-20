@@ -25,7 +25,9 @@ $bg-option2:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 			box-shadow: 5px 5px 2px 1px  rgba(242,230,234,0.5);
 		  }
 }
-
+.quote-container, .todo-container, .pomodoro-container {
+	cursor: grab;
+}
 * {
 	margin: 0;
 	padding: 0;
@@ -38,7 +40,7 @@ $bg-option2:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 	outline: none;
 }
 main {
-    background: $bg-option2;
+    background: $bg-option1;
     background-size: 400% 400%;
 	height: 100vh;
     animation: gradient 12s ease infinite;
@@ -151,15 +153,22 @@ input, button {
 	position: relative;
 	width: 35ch;
 	margin: 1em 0 1em 0;
+	cursor: text;
 
 	.del-btn {
 		position: absolute;
 		right: 5%;
 		bottom: 15%;
+		cursor: pointer;
 	}
 
 	.todo-text {
 		padding: 5px;
+		text-decoration: none;
+	}
+
+	.todo-text-crossed {
+		text-decoration: line-through;
 	}
 
 	.check-box {
@@ -257,4 +266,8 @@ input, button {
 	  width: 20ch;
 	  border-radius: 1em;
 	}
+}
+
+.test2 {
+	width: fit-content;
 }

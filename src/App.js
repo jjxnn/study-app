@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Pomodoro from './components/Pomodoro.js'
 import Quote from './components/Quote.js'
 import Todo from './components/Todo.js'
+import { motion } from 'framer-motion'
 
 const Test = ({name, clickEvent}) => {
   return (
@@ -31,7 +32,7 @@ const App = () => {
       id: 3
     }, 
     {
-      name: 'Reminder',
+      name: 'Hydrate',
       id: 4
     }, 
     {
@@ -60,7 +61,13 @@ const App = () => {
   }
 
   return (
-    <main>
+    <motion.div dragConstraints={{
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+    }}>
+      <main>
     <nav>
       <ul className="nav-bar">
         {navBar.map((option) => {
@@ -77,6 +84,8 @@ const App = () => {
     <Quote container={quote_cont}/>
     <Pomodoro container={pomodoro_cont}/>
 </main>
+    </motion.div>
+    
     
 
   )
