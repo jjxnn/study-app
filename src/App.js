@@ -45,28 +45,18 @@ const App = () => {
       case 1: 
       setPomodoro_cont(!pomodoro_cont)
       break;
-
       case 2: 
       setTodo_cont(!todo_cont)
       break;
-
       case 3: 
       setQuote_cont(!quote_cont)
       break; 
-
       default: 
         alert('Empty!')
     }
-
   }
 
   return (
-    <motion.div dragConstraints={{
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    }}>
       <main>
     <nav>
       <ul className="nav-bar">
@@ -74,9 +64,7 @@ const App = () => {
           return(
             <Test name={option.name}
                   key={option.id}
-                  clickEvent={() => handleContainer(option.id)}
-            />
-          )
+                  clickEvent={() => handleContainer(option.id)}/>)
         })}
       </ul>
     </nav>
@@ -84,7 +72,6 @@ const App = () => {
     <Quote container={quote_cont}/>
     <Pomodoro container={pomodoro_cont}/>
 </main>
-    </motion.div>
     
     
 
