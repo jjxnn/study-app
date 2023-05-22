@@ -112,11 +112,15 @@ input, button {
 	border-radius: 2rem;
 	background: rgba(255, 255, 255, 0.3);
 	padding: 0.7rem;
-	width: 35ch;
+	width: 25ch;
 	display: inline-block;
 	}
+	.note-tracker {
+		text-align: center;
+	}
+}
 
-	.add-btn {
+.add-btn {
 		display: inline-block;
 		position: relative;
 		border-radius: 50%;
@@ -126,7 +130,6 @@ input, button {
 		margin-left: 5px;
 		cursor: pointer;
 		background: rgba(255, 255, 255, 0.3);
-
 		span {
 			position: absolute;
 			top: 0;
@@ -134,17 +137,6 @@ input, button {
 		}
 	}
 
-	.note-tracker {
-		text-align: center;
-	}
-
-}
-
-.test {
-	div {
-		display: inline-block;
-	}
-}
 
 .note-box {
 	border-radius: 2rem;
@@ -268,11 +260,41 @@ input, button {
 	}
 }
 .water-cont {
-	@include glass;
-	width:fit-content;
-	padding: 2rem;
 	cursor: grab;
+	border-radius: 16px;
+	width: 150ch;
+	.water-main-cont {
+		display: flex;
+		flex-direction: row;
+		.main-display {
+			@include glass;
+			padding: 1rem;
+		}
+		.user-water-settings {
+		border: 2px solid red;
+		@include glass;
+		padding: 1rem;
+		width: 20ch;
+		input {
+			display: block;
+		}
+		}
+	}
+	
+	.user-other-settings {
+		display: block;
+	}
 }
-.test2 {
-	width: fit-content;
+
+.progress-bar {
+	border-radius: 2rem;
+	background: rgba(255, 255, 255, 0.3);
+	padding: 0.7rem;
+	width: 35ch;
+	text-align: center;
+	display: inline-block;
+}
+
+.selection {
+	background: gray;
 }
