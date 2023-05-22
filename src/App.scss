@@ -185,11 +185,12 @@ input, button {
 	}
 }
 
-
+.pom-motion {
+	width: fit-content;
+	border-radius: 16px;
+}
 .pomodoro-container {
 	@include glass;
-	border-radius: 16px;
-	width: fit-content;
 	padding: 1rem;
 	display: flex;
 	align-items: center;
@@ -201,7 +202,6 @@ input, button {
 	li {
 		display: inline-block;
 		@include pomodoro-btn;
-		  
 	}
 }
 
@@ -267,7 +267,12 @@ input, button {
 	  border-radius: 1em;
 	}
 }
-
+.water-cont {
+	@include glass;
+	width:fit-content;
+	padding: 2rem;
+	cursor: grab;
+}
 .test2 {
 	width: fit-content;
 }

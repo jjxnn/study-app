@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Pomodoro from './components/Pomodoro.js'
 import Quote from './components/Quote.js'
 import Todo from './components/Todo.js'
+import Hydrate from './components/Hydrate.js'
 import { motion } from 'framer-motion'
 
 const Test = ({name, clickEvent}) => {
@@ -18,9 +19,10 @@ const App = () => {
   const [pomodoro_cont, setPomodoro_cont] = useState(false)
   const [quote_cont, setQuote_cont] = useState(false)
   const [todo_cont, setTodo_cont] = useState(false)
+  const [water_cont, setWater_cont] = useState(false)
   const navBar = [
     {
-      name: 'Timer', 
+      name: 'Pomodoro', 
       id: 1
     }, 
     {
@@ -51,6 +53,9 @@ const App = () => {
       case 3: 
       setQuote_cont(!quote_cont)
       break; 
+      case 4:
+      setWater_cont(!water_cont)
+      break;
       default: 
         alert('Empty!')
     }
@@ -71,6 +76,7 @@ const App = () => {
     <Todo container={todo_cont}/>
     <Quote container={quote_cont}/>
     <Pomodoro container={pomodoro_cont}/>
+    <Hydrate container={water_cont}/>
 </main>
     
     

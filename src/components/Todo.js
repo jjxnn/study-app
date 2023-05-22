@@ -85,7 +85,6 @@ const Todo = ({container}) => {
         <div >
           <small className="mini-title">&#x270D; To-do List</small>
         <Note input={input} handleInputChange={handleInputChange} addNote={addNote}/>
-        {/* Passing ref into the List components, then using it to access in the main component  */}
         <List input={notes} deleteNote={delNote} crossNote={crossNote}/>
         <Count noteCount={countNote} completeNote={completeNote}/>
       </div>

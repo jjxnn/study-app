@@ -72,7 +72,7 @@ const Input = ({clicked, submit}) => {
       </div>
       
       <div>
-        <label>Long Break</label>
+      <label>Long Break</label>
       <input name="long_break" onChange={handleInputChange} type="number" placeholder="15" min="1"/>
       </div>
       
@@ -85,7 +85,7 @@ const Input = ({clicked, submit}) => {
 }
 
 const Pomodoro = ({container}) => {
-    const [pomodoro, setPomodoro] = useState(1500)
+  const [pomodoro, setPomodoro] = useState(1500)
   const [seconds, setSeconds] = useState(pomodoro)
   const [shortBreak, setshortBreak] = useState(300)
   const [longBreak, setlongBreak] = useState(900)
@@ -94,7 +94,7 @@ const Pomodoro = ({container}) => {
   const [currTab, setcurrTab] = useState(1)
 
   //Set Time based on user input 
-  const clickAudio = new Audio(click)
+const clickAudio = new Audio(click)
 
 const toggleTime = useCallback((time, tab) => {
     setSeconds(time)
@@ -146,7 +146,7 @@ const submitValue = (e, input) => {
 }
 if(container === true) {
     return (
-    <motion.div drag dragConstraints={{ left: 0, top: 0, right: (window.innerWidth * 80) / 100, bottom: (window.innerHeight * 40) / 100}}>
+    <motion.div drag dragConstraints={{ left: 0, top: 0, right: (window.innerWidth * 80) / 100, bottom: (window.innerHeight * 40) / 100}} className="pom-motion">
     <div className="pomodoro-container">
        <div className="container">
     <Timer setTime={toggleTime} sbreak={shortBreak} lbreak={longBreak} pomodoro={pomodoro} currTab={currTab} />
