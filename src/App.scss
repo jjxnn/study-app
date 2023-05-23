@@ -29,7 +29,6 @@ $bg-option2:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 @mixin input-box {
 	padding: 10px;
 	background-color: #F3F3F3;
-	border: 1px solid white;
 	margin-right: 1em;
 	border-radius: 1em;
 	max-width: 15ch;
@@ -130,13 +129,7 @@ input, button {
 	border-radius: 16px;
 	gap: 2em;
 	padding: 1rem;
-	.input-box {
-	border-radius: 2rem;
-	background: rgba(255, 255, 255, 0.3);
-	padding: 0.7rem;
-	width: 35ch;
-	display: inline-block;
-	}
+	
 	
 }
 .add-btn {
@@ -238,6 +231,9 @@ input, button {
 		font-size: 1rem;
 		text-align: start;
 	  }
+	input {
+		@include input-box;
+	}
 	div {
 	  display: inline-block;
 	  label {
@@ -247,14 +243,11 @@ input, button {
 		font-size: 0.8rem;
 	  }
   
-	  input {
-		@include input-box;
-	  }
+	  
 	}
   
 	
 }
-
 
 .apply-btn {
 	  color: white;
@@ -317,8 +310,15 @@ input, button {
 .tracker-container {
 	margin-top: 1em;
 	display: flex;
+	.input-box{
+		width: 50ch;
+		border-radius: 2rem;
+		background: rgba(255, 255, 255, 0.3);
+		padding: 0.7rem;
+		width: 34ch;
+		display: inline-block;
+	}
 }
-
 
 // Animations 
 @keyframes gradient {
@@ -331,4 +331,14 @@ input, button {
 	100% {
 		background-position: 0% 50%;
 	}
+}
+
+
+// Active Toggle 
+.active {
+	display: block;
+}
+
+.not-active {
+	display: none;
 }

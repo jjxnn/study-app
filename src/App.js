@@ -4,7 +4,6 @@ import Pomodoro from './components/Pomodoro.js'
 import Quote from './components/Quote.js'
 import Todo from './components/Todo.js'
 import Hydrate from './components/Hydrate.js'
-import { motion } from 'framer-motion'
 
 const Test = ({name, clickEvent}) => {
   return (
@@ -57,7 +56,7 @@ const App = () => {
       setWater_cont(!water_cont)
       break;
       default: 
-        alert('Empty!')
+        alert('In Construction!')
     }
   }
 
