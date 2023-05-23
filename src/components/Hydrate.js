@@ -2,63 +2,70 @@ import React, { useState, useEffect } from 'react'
 import Display from './Pomodoro.js'
 import { motion } from 'framer-motion'
 
+// 
 const Tracker = ({unit, open, intake, goal}) => {         
     return(
-        <div>
+        <div className='tracker-container'>
             <div className="progress-bar">{intake} / {goal} {unit}</div>
-            <button className="add-btn" onClick={open}>+</button>
+            <button className="add-btn" onClick={open}><span>+</span></button>
         </div>
     )
 }
 
+// 
 const Timer = ({timer}) => {
-    let minute_to_second = timer * 60; 
-    let minute = Math.floor(minute_to_second / 60)
-    let digit_second = minute_to_second % 60
+    let minute = Math.floor(timer / 60)
+    let digit_second = timer % 60
     return(digit_second >= 10 ? <div className="clock-display">{minute}:{digit_second}</div> : <div className="clock-display">{minute}:0{digit_second}</div>)
 }
 
+// 
 const Settings = ({clicked, unitSelect, unit, setTime}) => {
-    
     if(clicked === true) {
         return(
         <form className="user-other-settings">
+
             <label>Water Unit</label><select onChange={unitSelect} defaultValue={unit[0]}>
                 {unit.map((units, index) => <option key={index} className="selection">{units}</option>)}
             </select>
 
             <label>Set Time</label><input type="number" placeholder="60" onChange={setTime}/>
             <label>Sound Volume</label><input type="range" min="1" max="100"/>
-            <button>Apply</button>
-        </form>
+            <button className='apply-btn'>Apply</button>
+        </form>  
     )
     }
 }
+
+// 
 const WaterSettings = ({open, userInput, setWater}) => {
     if(open === true ) {
        return(
-        <form className="user-water-settings">
+        <form className="user-water-settings"> 
+            <label>Set Water Goal</label>
+            <input name="goal" type="number" onChange={userInput}/>
+
+            <div>
                 <label>Set Intake</label>
-                <input name="intake" type="number" onChange={userInput}/>
-                <label>Set Water Goal</label>
-                <input name="goal" type="number" onChange={userInput}/>
-                <button onClick={setWater}>Apply</button>
-            </form>
+                <input name="intake" type="number" onChange={userInput}/>  
+            </div>
+
+            <button onClick={setWater} className="apply-btn">Apply</button>
+        </form>
     ) 
     }
 }
+
+// 
 const Hydrate = ({container}) => {
     const [clicked, setClicked] = useState(false)
     const [clicksetting, setClicksetting] = useState(false)
     const [waterUnit, setWaterUnit] = useState('fl. oz') 
     const [open, setOpen] = useState(false)
-    const [timer, setTimer] = useState(60)
-    const [input, setInput] = useState({
-        goal: 0,
-        intake: 0})
+    const [timer, setTimer] = useState(3600)
+    const [input, setInput] = useState({goal: 0, intake: 0})
     const [goal, setGoal] = useState(0)
     const [intake, setIntake] = useState(0)
-    
     const unit = ['fl. oz', 'mL'] 
 
 
@@ -73,10 +80,8 @@ const Hydrate = ({container}) => {
       }, [clicked, timer])
 
 
-    const unitSelect = (e) => {
-        setWaterUnit(e.target.value)
-    }
-
+    
+    //   Need to click up these events into one 
     const clickStart = () => {
         setClicked(!clicked)
     }
@@ -84,15 +89,20 @@ const Hydrate = ({container}) => {
     const clickSettings = () => {
         setClicksetting(!clicksetting)
     }
-
-    const setTime = (e) => {
-        setTimer(e.target.value)
-    }
-
-
     const waterSetting = () => {
         setOpen(!open)
     } 
+
+
+    // A bit cleaning up
+    const setTime = (e) => {
+        setTimer(e.target.value * 60)
+    }
+    const unitSelect = (e) => {
+        setWaterUnit(e.target.value)
+    }
+
+    
     
     const handleInputChange = (e) => {
         setInput({
@@ -112,7 +122,6 @@ const Hydrate = ({container}) => {
 
     if(container === true) {
         return(
-        
         <motion.div className="water-cont" drag>
             <div className="water-main-cont">
                 <div className="main-display">
@@ -126,12 +135,10 @@ const Hydrate = ({container}) => {
                 </div>
                 <WaterSettings open={open} userInput={handleInputChange} setWater={setWater}/>
             </div>
-            
             <Settings clicked={clicksetting} unitSelect={unitSelect} unit={unit} setTime={setTime}/> 
         </motion.div>
     )
     }
-    
 }
 
 

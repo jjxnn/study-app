@@ -5,9 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 
   const Note = ({input, handleInputChange, addNote}) => {
     return (
-      <div className="test">
-        <div><input placeholder="Enter a task" value={input} type="text" onChange={handleInputChange} className="input-box"/></div> 
-        <div><button onClick={addNote} type="submit" className="add-btn"><span>+</span></button></div>
+      < div className="tracker-container">
+        <input placeholder="Enter a task" value={input} type="text" onChange={handleInputChange} className="input-box"/>
+        <button onClick={addNote} type="submit" className="add-btn"><span>+</span></button>
       </div>
       
     )

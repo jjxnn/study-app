@@ -25,9 +25,41 @@ $bg-option2:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 			box-shadow: 5px 5px 2px 1px  rgba(242,230,234,0.5);
 		  }
 }
-.quote-container, .todo-container, .pomodoro-container {
-	cursor: grab;
+
+@mixin input-box {
+	padding: 10px;
+	background-color: #F3F3F3;
+	border: 1px solid white;
+	margin-right: 1em;
+	border-radius: 1em;
+	max-width: 15ch;
+	color: black;
 }
+
+@mixin add-btn {
+	display: inline-block;
+	position: relative;
+	border-radius: 50%;
+	font-size: 2rem;
+	height: 45px;
+	width: 45px;
+	margin-left: 5px;
+	cursor: pointer;
+	background: rgba(255, 255, 255, 0.3);
+		span {
+			position: absolute;
+			top: 0;
+			right: 30%;
+		}
+}
+
+/* Universal Selectors */
+.quote-container, .todo-container, .pomodoro-container, .water-cont {
+	cursor: grab;
+	width: fit-content;
+}
+
+
 * {
 	margin: 0;
 	padding: 0;
@@ -40,7 +72,7 @@ $bg-option2:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 	outline: none;
 }
 main {
-    background: $bg-option1;
+    background: $bg-option2;
     background-size: 400% 400%;
 	height: 100vh;
     animation: gradient 12s ease infinite;
@@ -54,17 +86,7 @@ input, button {
 
 
 
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
+
 
 .nav-bar {
 	list-style-type: none;
@@ -112,30 +134,14 @@ input, button {
 	border-radius: 2rem;
 	background: rgba(255, 255, 255, 0.3);
 	padding: 0.7rem;
-	width: 25ch;
+	width: 35ch;
 	display: inline-block;
 	}
-	.note-tracker {
-		text-align: center;
-	}
+	
 }
-
 .add-btn {
-		display: inline-block;
-		position: relative;
-		border-radius: 50%;
-		font-size: 2rem;
-		height: 45px;
-		width: 45px;
-		margin-left: 5px;
-		cursor: pointer;
-		background: rgba(255, 255, 255, 0.3);
-		span {
-			position: absolute;
-			top: 0;
-			right: 30%;
-		}
-	}
+	@include add-btn;
+}
 
 
 .note-box {
@@ -212,6 +218,8 @@ input, button {
 .btn-container {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 	.start-btn {
 	@include pomodoro-btn;
 	font-size: 1rem;
@@ -240,29 +248,26 @@ input, button {
 	  }
   
 	  input {
-		padding: 10px;
-		background-color: #F3F3F3;
-		border: 1px solid white;
-		margin-right: 1em;
-		border-radius: 1em;
-		max-width: 15ch;
-		color: black;
+		@include input-box;
 	  }
 	}
   
-	.apply-btn {
+	
+}
+
+
+.apply-btn {
 	  color: white;
 	  background: #f28482;
 	  padding: 0.7rem;
 	  border: none;
 	  width: 20ch;
+	  margin-top: 1em;
 	  border-radius: 1em;
 	}
-}
+
+
 .water-cont {
-	cursor: grab;
-	border-radius: 16px;
-	width: 150ch;
 	.water-main-cont {
 		display: flex;
 		flex-direction: row;
@@ -271,18 +276,32 @@ input, button {
 			padding: 1rem;
 		}
 		.user-water-settings {
-		border: 2px solid red;
 		@include glass;
 		padding: 1rem;
 		width: 20ch;
 		input {
 			display: block;
+			@include input-box;
+			margin-top: 0.5em;
 		}
 		}
 	}
 	
 	.user-other-settings {
-		display: block;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		padding: 1em;
+		justify-content: space-between;
+		@include glass;
+		width: 43.5ch;
+		input, select, option {
+			@include input-box;
+			margin-bottom: 1em;
+			margin-left: 3em;
+		}
+		label {
+			margin-top: 0.5em;
+		}
 	}
 }
 
@@ -295,6 +314,21 @@ input, button {
 	display: inline-block;
 }
 
-.selection {
-	background: gray;
+.tracker-container {
+	margin-top: 1em;
+	display: flex;
+}
+
+
+// Animations 
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
