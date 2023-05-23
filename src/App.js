@@ -13,6 +13,11 @@ const Test = ({name, clickEvent}) => {
   )
   }
 
+  const Logo = () => {
+    return(
+      <header className='header'>Pockeity</header>
+    )
+  }
 
 const App = () => {
   const [pomodoro_cont, setPomodoro_cont] = useState(false)
@@ -22,24 +27,29 @@ const App = () => {
   const navBar = [
     {
       name: 'Pomodoro', 
-      id: 1
+      id: 1, 
+      clicked: false,
     }, 
     {
       name: 'To-do', 
       id: 2, 
+      clicked: false,
     }, 
     {
       name: 'Quote',
-      id: 3
+      id: 3, 
+      clicked: false,
     }, 
     {
       name: 'Hydrate',
-      id: 4
+      id: 4,
+      clicked: false, 
     }, 
     {
       name: 'Sound', 
-      id: 5
-    }
+      id: 5,
+      clicked: false,
+    }, 
   ]
   const handleContainer = (curr_container) => {
     switch(curr_container) {
@@ -62,6 +72,7 @@ const App = () => {
 
   return (
       <main>
+        <Logo/>
     <nav>
       <ul className="nav-bar">
         {navBar.map((option) => {
