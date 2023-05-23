@@ -28,7 +28,7 @@ $bg-option2:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 
 @mixin input-box {
 	padding: 10px;
-	background-color: #F3F3F3;
+	background-color: #FFF;
 	margin-right: 1em;
 	border-radius: 1em;
 	max-width: 15ch;
@@ -287,7 +287,7 @@ input, button {
 		justify-content: space-between;
 		@include glass;
 		width: 43.5ch;
-		input, select, option {
+		input, select  {
 			@include input-box;
 			margin-bottom: 1em;
 			margin-left: 3em;
