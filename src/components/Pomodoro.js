@@ -130,9 +130,6 @@ const clickStart = (e) => {
 }
 
 const clickSettings = () => {
-  if(!clicked2) {
-    setClicked2(true)
-  } 
   setClicked2(!clicked2)
 }
 

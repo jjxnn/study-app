@@ -20,7 +20,7 @@ const Timer = ({timer}) => {
 }
 
 // 
-const Settings = ({clicked, unitSelect, unit, userInput, setSettings}) => {
+const Settings = ({clicked, unitSelect, unit, userInput, setSettings, timer}) => {
     if(clicked === true) {
         return(
         <form className="user-other-settings">
@@ -28,7 +28,7 @@ const Settings = ({clicked, unitSelect, unit, userInput, setSettings}) => {
             <select onChange={unitSelect}>{unit.map((units, index) => <option key={index} className="selection">{units}</option>)}</select>
 
             <label>Set Time (minutes)</label>
-            <input type="number" name="time" min="1" placeholder="60" onChange={userInput}/>
+            <input type="number" name="time" value={timer} min="1" onChange={userInput}/>
 
             <label>Sound Volume</label>
             <input type="range" min="1" max="100" onChange={userInput} className='slider'/>
@@ -57,15 +57,13 @@ const WaterSettings = ({clicked, userInput, setWater, unit, goal}) => {
     ) 
     }
 }
-
 // 
 const Hydrate = ({container}) => {
     //Timer and Volume settings 
     const [timer, setTimer] = useState(3600)
-    const [volume, setVolume] = useState(50)
 
     //All the input rfom user 
-    const [input, setInput] = useState({goal: 0, intake: 0, time: 3600, volume: 50})
+    const [input, setInput] = useState({goal: 0, intake: 0, time: 60})
 
     //User Water Intake Settings 
     const [goal, setGoal] = useState(0)
@@ -78,11 +76,12 @@ const Hydrate = ({container}) => {
 
     //Button Management 
     const [buttons, setButtons] = useState([
-    {id: 1, start: 'button_1', open: false},
-    {id: 2, name: 'button_2', open: false},
-    {id: 3, name: 'button_3', open: false},
-    {id: 4, name: 'button_4', open: false}])
+    {id: 1, name: 'start_btn', open: false},
+    {id: 2, name: 'setting-btn', open: false},
+    {id: 3, name: 'tracker-btn', open: false},])
     
+    // Handle buttons - Append the new map array into buttons useState based on the id passed by the onClick events.
+    const clickAudio = new Audio(click) 
     function handleTab(id) {
         const newArray = buttons.map(btn => {
             if(btn.id === id) {
@@ -90,8 +89,10 @@ const Hydrate = ({container}) => {
             }
             return btn
         })
+        clickAudio.play()
         setButtons(newArray)
     }
+    
     // Time Interval - Count down dependencies of open.start and timer value 
     useEffect(() => {
         if(buttons[0].open === true && timer > 0) {
@@ -103,7 +104,7 @@ const Hydrate = ({container}) => {
         
       }, [buttons[0].open, timer])
 
-      
+
     const handleInputChange = (e) => {
         setInput({
           ...input, [e.target.name] : e.target.value,})
@@ -125,14 +126,12 @@ const Hydrate = ({container}) => {
     const setSetting = (e) => {
         e.preventDefault()
         setTimer(input.time * 60)
-        setVolume(input.volume)
         setWaterUnit(userUnit)
     }
 
 
     if(container === true) {
-        return(
-        <motion.div className="water-cont" drag>
+        return(<motion.div className="water-cont" drag>
             <div className="water-main-cont">
                 <div className="main-display">
                     <small> &#x1F4A7; Water Reminder </small>
@@ -145,7 +144,7 @@ const Hydrate = ({container}) => {
                 </div>
                 <WaterSettings  clicked={buttons[2].open} userInput={handleInputChange} setWater={setWater} unit={waterUnit} goal={goal}/>
             </div>
-            <Settings clicked={buttons[1].open}  unitSelect={unitSelect} unit={unit} userInput={handleInputChange} setSettings={setSetting}/> 
+            <Settings clicked={buttons[1].open}  unitSelect={unitSelect} unit={unit} userInput={handleInputChange} setSettings={setSetting} timer={input.time}/> 
         </motion.div>
     )
     }
