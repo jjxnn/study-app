@@ -88,7 +88,7 @@ const App = () => {
             <Nav name={option.name}
                   key={option.id}
                   clickEvent={() => handleContainer(option.id)}/>)})}
-        <li><button>:3</button></li>
+        <li className='nav-list'><button>:3</button></li>
       </ul>
     </nav>
     <Todo container={todo_cont}/>

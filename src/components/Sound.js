@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useCallback} from 'react'
 import ocean from '../audio/ocean.mp3'
 import forest from '../audio/forest.mp3'
 import cafe from '../audio/cafe.mp3'
@@ -9,9 +9,8 @@ import { motion } from 'framer-motion'
 const Display = ({sound, playAudio, adjustVolume}) => {
     return(
         <div className='sound'><li key={sound.id}>{sound.name}</li>
-          <button onClick={(e) => {
-            playAudio(e, sound)}
-          }>Play</button>  <input type="range" onChange={(e) => adjustVolume(e, sound)}/>
+          <button onClick={(e) => playAudio(e, sound)}>Play</button>  
+          <input type="range" onChange={(e) => adjustVolume(e, sound)}/>
         </div>
     )
 }
@@ -24,22 +23,35 @@ const Sound = ({container}) => {
         {id: 4, name: 'Keyboard', played: false},
         {id: 5, name: 'Forest', played: false},])
 
-    const audios = {
+    const [audios, setnewAudios] = useState({
         'Ocean': new Audio(ocean), 
         'Forest': new Audio(forest),
         'Cafe': new Audio(cafe),
         'Rain': new Audio(rain),
         'Keyboard': new Audio(keyboard)
-    }
+    })
         
 
-    const playAudio = (e, sound) => {
+    const playAudio = useCallback((e, sound) => {
+            let array = soundBoard.map(s => {
+            if(s.id === sound.id) {
+              console.log({...s, played: !s.played})
+              return {...s, played: !s.played}
+            }
+            return s
+          })
+          setSoundBoard(array)
+
         if(sound.played === false) {
             e.target.textContent = "Pause"
             audios[sound.name].loop = true; 
             audios[sound.name].play()
+        } 
+        if(sound.played === true) {
+            e.target.textContent = "Start"
+            audios[sound.name].pause()
         }
-    }
+    })
 
     const adjustVolume = (e, sound) => {
         audios[sound.name].volume = parseInt(e.target.value) / 100; 
