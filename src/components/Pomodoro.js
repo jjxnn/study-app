@@ -122,7 +122,6 @@ const toggleTime = useCallback((time, tab) => {
 
 const clickStart = (e) => {
   if(!clicked) {
-    setClicked(true)
     e.target.textContent = "Pause"
   } else {e.target.textContent = "Start"}
   setClicked(!clicked)

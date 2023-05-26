@@ -7,11 +7,13 @@ $bg-option2:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 /* Mixins */ 
 
 @mixin glass {
+	padding: 1rem;
 	background: rgba(255, 255, 255, 0.15);
 	border-radius: 16px;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(5px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
+	width: fit-content;
 }
 
 @mixin pomodoro-btn {
@@ -133,9 +135,6 @@ input, button {
 	width: fit-content;
 	border-radius: 16px;
 	gap: 2em;
-	padding: 1rem;
-	
-	
 }
 .add-btn {
 	@include add-btn;
@@ -187,7 +186,6 @@ input, button {
 }
 .pomodoro-container {
 	@include glass;
-	padding: 1rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -322,6 +320,13 @@ input, button {
 		padding: 0.7rem;
 		width: 34ch;
 		display: inline-block;
+	}
+}
+
+.soundboard-cont {
+	@include glass;
+	.sound {
+		padding: 1.5em;
 	}
 }
 

@@ -6,7 +6,7 @@ import Todo from './components/Todo.js'
 import Hydrate from './components/Hydrate.js'
 import Sound from './components/Sound.js'
 
-const Test = ({name, clickEvent}) => {
+const Nav = ({name, clickEvent}) => {
   return (
     <>
     <li className="nav-list" onClick={clickEvent}>{name}</li>
@@ -72,6 +72,7 @@ const App = () => {
       break;
       case 5: 
       setSound_cont(!sound_cont)
+      break;
       default: 
         alert('In Construction!')
     }
@@ -84,10 +85,10 @@ const App = () => {
       <ul className="nav-bar">
         {navBar.map((option) => {
           return(
-            <Test name={option.name}
+            <Nav name={option.name}
                   key={option.id}
-                  clickEvent={() => handleContainer(option.id)}/>)
-        })}
+                  clickEvent={() => handleContainer(option.id)}/>)})}
+        <li><button>:3</button></li>
       </ul>
     </nav>
     <Todo container={todo_cont}/>
