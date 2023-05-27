@@ -1,5 +1,5 @@
-import './App.scss';
-import variables from './variables.scss'
+import './styles/App.scss';
+import variables from './styles/variables.scss'
 import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import Pomodoro from './components/Pomodoro.js'
