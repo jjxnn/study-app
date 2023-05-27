@@ -35,7 +35,6 @@ const Sound = ({container}) => {
     const playAudio = useCallback((e, sound) => {
             let array = soundBoard.map(s => {
             if(s.id === sound.id) {
-              console.log({...s, played: !s.played})
               return {...s, played: !s.played}
             }
             return s
@@ -46,12 +45,11 @@ const Sound = ({container}) => {
             e.target.textContent = "Pause"
             audios[sound.name].loop = true; 
             audios[sound.name].play()
-        } 
-        if(sound.played === true) {
+        } else {
             e.target.textContent = "Start"
             audios[sound.name].pause()
         }
-    })
+    }, [soundBoard])
 
     const adjustVolume = (e, sound) => {
         audios[sound.name].volume = parseInt(e.target.value) / 100; 

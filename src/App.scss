@@ -1,5 +1,6 @@
 $bg-option1:linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 $bg-option2:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+$bg-option3: linear-gradient( 270.3deg,  rgba(84,212,228,1) 0.2%, rgba(68,36,164,1) 100% );
 /* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Asap&display=swap');
 
@@ -73,7 +74,7 @@ $bg-option2:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
 	outline: none;
 }
 main {
-    background: $bg-option2;
+    background: $bg-option3;
     background-size: 400% 400%;
 	height: 100vh;
     animation: gradient 12s ease infinite;
@@ -328,7 +329,12 @@ input, button {
 		padding: 1.5em;
 	}
 }
-
+.bg-button {
+	background: $bg-option2;
+	width: 25px;
+	height: 25px;
+	border-radius: 5px;
+}
 // Animations 
 @keyframes gradient {
 	0% {

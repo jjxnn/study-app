@@ -21,12 +21,8 @@ const Nav = ({name, clickEvent}) => {
   }
 
 const App = () => {
-  const [pomodoro_cont, setPomodoro_cont] = useState(false)
-  const [quote_cont, setQuote_cont] = useState(false)
-  const [todo_cont, setTodo_cont] = useState(false)
-  const [water_cont, setWater_cont] = useState(false)
-  const [sound_cont, setSound_cont] = useState(false)
-  const navBar = [
+
+  const [navBar, setNavBar] = useState([
     {
       name: 'Pomodoro', 
       id: 1, 
@@ -52,34 +48,23 @@ const App = () => {
       id: 5,
       clicked: false,
     }, 
-  ]
+  ])
 
 
   // Will be cleaning this up later...
   const handleContainer = (curr_container) => {
-    switch(curr_container) {
-      case 1: 
-      setPomodoro_cont(!pomodoro_cont)
-      break;
-      case 2: 
-      setTodo_cont(!todo_cont)
-      break;
-      case 3: 
-      setQuote_cont(!quote_cont)
-      break; 
-      case 4:
-      setWater_cont(!water_cont)
-      break;
-      case 5: 
-      setSound_cont(!sound_cont)
-      break;
-      default: 
-        alert('In Construction!')
-    }
+    const newArray = navBar.map(nav => {
+      if(nav.id === curr_container) {
+        return {...nav, clicked: !nav.clicked}
+      }
+      return nav
+    })
+    setNavBar(newArray)
   }
 
   return (
-      <main>
+    <>
+    <main>
         <Logo/>
     <nav>
       <ul className="nav-bar">
@@ -88,16 +73,17 @@ const App = () => {
             <Nav name={option.name}
                   key={option.id}
                   clickEvent={() => handleContainer(option.id)}/>)})}
-        <li className='nav-list'><button>:3</button></li>
+        <li className='nav-list'><button className='bg-button'></button></li>
       </ul>
     </nav>
-    <Todo container={todo_cont}/>
-    <Quote container={quote_cont}/>
-    <Pomodoro container={pomodoro_cont}/>
-    <Hydrate container={water_cont}/>
-    <Sound container={sound_cont}/>
+    <Todo container={navBar[1].clicked}/>
+    <Quote container={navBar[2].clicked}/>
+    <Pomodoro container={navBar[0].clicked}/>
+    <Hydrate container={navBar[3].clicked}/>
+    <Sound container={navBar[4].clicked}/>
 </main>
-    
+    </>
+      
     
 
   )
