@@ -63,8 +63,9 @@
 * {
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
+	overflow-x: hidden;
 	color: white;
+	background: none;
 	font-family: 'Asap', sans-serif;
 }
 
@@ -77,12 +78,19 @@ input, button {
 }
 
 
-
+nav {
+	position: fixed;
+	bottom: 5%;
+	left: 50%;
+	transform: translateX(-50%);
+}
 .header {
 	color: black;
 	padding: 2rem;
 	background-color: #f3f3f3;
 	box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.36);
+	border-bottom-right-radius: 16px;
+	border-bottom-left-radius: 16px;
 }
 
 .nav-bar {
@@ -90,9 +98,6 @@ input, button {
 	z-index: 1;
 	padding: 1em;
 	border-radius: 2rem;
-	position: absolute;
-	bottom: 5%;
-	left: 38%;
 	@include glass;
 	.nav-list {
 		color: white;
@@ -337,8 +342,8 @@ input, button {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 1em;
+	margin-left: auto;
 }
-// Animations 
 
 
 // Active Toggle 

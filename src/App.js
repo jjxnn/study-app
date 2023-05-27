@@ -82,16 +82,14 @@ const gradient = keyframes`
 }
 100% {
   background-position: 0% 50%;
-}
-`;
+}`;
 
 const StyledMain = styled.main`
   background:${props => props.$inputColor};
   height: 100vh;
   background-size: 400% 400%;
   animation: ${gradient} 12s ease infinite;
-  position: relative;
-`;
+  position: relative; `;
 const App = () => {
 
   const [navBar, setNavBar] = useState([
@@ -149,7 +147,9 @@ const App = () => {
                 key={option.id}
                 clickEvent={() => handleContainer(option.id)}/>)})}
           <li className='nav-list'><button className='bg-button' style={{background: userBG}} onClick={openBackground}></button></li>
+          
         </ul>
+        
       </nav>
     <Todo container={navBar[1].clicked}/>
     <Quote container={navBar[2].clicked}/>
