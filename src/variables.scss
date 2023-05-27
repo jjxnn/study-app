@@ -1,0 +1,15 @@
+$bg-option1:linear-gradient( 100.5deg,  rgba(148,146,236,1) 17.7%, rgba(245,194,194,1) 76.1% );;
+$bg-option2:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+$bg-option3: linear-gradient(270.3deg,  rgba(84,212,228,1) 0.2%, rgba(68,36,164,1) 100%);
+$bg-option4: linear-gradient( 108.4deg,  rgba(10,255,194,1) 11.2%, rgba(0,175,226,1) 88.6% );
+$bg-option5: linear-gradient(69.7deg,  rgba(244,37,243,1) 1.4%, rgba(244,87,1,1) 36.2%, rgba(255,204,37,1) 72.2%, rgba(20,196,6,1) 113%);
+$bg-option6: linear-gradient(111.1deg,  rgba(0,40,70,1) -4.8%, rgba(255,115,115,1) 82.7%, rgba(255,175,123,1) 97.2% );
+
+:export {
+    bg_option1: $bg-option1;
+    bg_option2: $bg-option2;
+    bg_option3: $bg-option3;
+    bg_option4: $bg-option4;
+    bg_option5: $bg-option5;
+    bg_option6: $bg-option6;
+}
