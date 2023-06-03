@@ -31,6 +31,8 @@
 	background-color: #FFF;
 	border-radius: 1em;
 	color: black;
+	width: 15ch;
+	margin-bottom: 10px;
 }
 
 @mixin add-btn {
@@ -241,15 +243,7 @@ nav {
 		display: block;
 		font-size: 0.8rem;
 	  }
-
-	  input {
-		@include input-box;
-		width: 15ch;
 	}
-	  
-	}
-  
-	
 }
 
 .apply-btn {
@@ -297,14 +291,27 @@ nav {
 		}
 	}
 }
-
-.progress-bar {
+.progress-bar-cont {
 	border-radius: 2rem;
 	background: rgba(255, 255, 255, 0.3);
-	padding: 0.7rem;
 	width: 35ch;
-	text-align: center;
 	display: inline-block;
+	position: relative;
+	.goal-display {
+		z-index: 1;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+.progress-bar {
+	background: rgba(255, 255, 255, 0.3);
+	position: absolute;
+	text-align: center;
+	width: 0;
+	bottom: 0;
+	top: 0;
 }
 
 .tracker-container {
@@ -402,8 +409,6 @@ input[type="range"] {
 
 // Exporting variables
 
-// Reworking CSS down here
 .input {
 	@include input-box();
-	width: 15ch;
 }

@@ -1,6 +1,9 @@
 import React, {useEffect, useState, useRef, useCallback} from 'react'
 import click from '../audio/click.mp3'
 import { motion } from 'framer-motion'
+
+
+// Task: Optimize the code for Pomodoro.js 
 const Display = ({minute, digit}) => {
 
   return (digit >= 10 ? <div className="clock-display">{minute}:{digit}</div> : <div className="clock-display">{minute}:0{digit}</div>)
@@ -64,15 +67,15 @@ const Input = ({clicked, submit}) => {
       <h3>T I M E (minutes)</h3>
       <div>
         <label>Pomodoro</label>
-        <input name="pomodoro" onChange={handleInputChange} type="number" placeholder="25" min="1"/></div>
+        <input name="pomodoro" onChange={handleInputChange} type="number" placeholder="25" min="1" className='input'/></div>
       <div>
       <label>Short Break</label>
-      <input name="short_break" onChange={handleInputChange} type="number" placeholder="5" min="1"/>
+      <input name="short_break" onChange={handleInputChange} type="number" placeholder="5" min="1" className='input'/>
       </div>
       
       <div>
       <label>Long Break</label>
-      <input name="long_break" onChange={handleInputChange} type="number" placeholder="15" min="1"/>
+      <input name="long_break" onChange={handleInputChange} type="number" placeholder="15" min="1" className='input'/>
       </div>
       
 
@@ -128,16 +131,18 @@ const clickStart = (e) => {
 }
 
 const clickSettings = () => {
+  clickAudio.play()
   setClicked2(!clicked2)
 }
 
 const submitValue = (e, input) => {
   e.preventDefault()
+  // Fix this. 
   setPomodoro(input.pomodoro)
   setSeconds(input.pomodoro)
   setlongBreak(input.long_break)
   setshortBreak(input.short_break)
-  setClicked2(false)
+  setClicked2(!clicked2)
 }
 if(container === true) {
     return (

@@ -1,12 +1,35 @@
 import React, { useState, useEffect} from 'react'
 import click from '../audio/click.mp3'
+import styled, { keyframes } from 'styled-components'
 import { motion } from 'framer-motion'
 import '../styles/App.scss';
 // 
-const Tracker = ({unit, clicked, intake, goal}) => {         
+const ProgressBar = styled(motion.div)`
+background: rgba(255, 255, 255, 0.3);
+position: absolute;
+text-align: center;
+width: ${props => props.$value};
+bottom: 0;
+top: 0;
+  `;
+
+const Tracker = ({unit, clicked, intake, goal}) => {     
+    const [tracker, setTracker] = useState()
+   useEffect(() => {
+    if(goal > 0 ) {
+       setTracker(Math.round((intake / goal) * 100))
+    }
+        
+   }, [intake, goal])
+    
+
     return(
         <div className='tracker-container'>
-            <div className="progress-bar">{intake} / {goal} {unit}</div>
+            <div className="progress-bar-cont">
+                <div className='goal-display'>{intake} / {goal} {unit}</div>
+             <ProgressBar $value={String(tracker) + '%'} animate={{width: `${String(tracker)}%`}} ></ProgressBar>   
+            </div>
+            
             <button className="add-btn" onClick={() => clicked(3)}><span>+</span></button>
         </div>
     )
@@ -53,11 +76,11 @@ const WaterSettings = ({clicked, userInput, setWater, unit, goal}) => {
        return(
         <form className="user-water-settings"> 
             <label>Set Water Goal ({unit})</label>
-            <input type="number" name="goal" min="1" placeholder={goal} onChange={userInput}/>
+            <input type="number" name="goal" min="1" placeholder={goal} onChange={userInput} className='input'/>
 
             <div className={goal <= 0 ? "not-active" : "active"}>
                 <label>Set Intake ({unit})</label>
-                <input type="number" name="intake" min="1" onChange={userInput}/>  
+                <input type="number" name="intake" min="1" onChange={userInput} className='input'/>  
             </div>
 
             <button onClick={setWater} className="apply-btn">Apply</button>
@@ -125,6 +148,7 @@ const Hydrate = ({container}) => {
             setIntake(intake + parseInt(input.intake))
          }
         setGoal(input.goal)
+        handleTab(3)
     }
 
     const unitSelect = (e) => {
@@ -135,6 +159,7 @@ const Hydrate = ({container}) => {
         e.preventDefault()
         setTimer(input.time * 60)
         setWaterUnit(userUnit)
+        handleTab(2)
     }
 
 

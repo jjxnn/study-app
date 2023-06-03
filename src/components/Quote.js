@@ -9,7 +9,6 @@ const Generator = ({quote}) => {
       )
 }
 
-
 const Quote = ({container}) => {
   const [quote, setQuote] = useState('')
 
@@ -18,10 +17,10 @@ const Quote = ({container}) => {
       setQuote(initialQuote)
     })
   }, [])
+
   if(container === true) {
     return(
       <>
-      
     <motion.div className="quote-container" drag dragConstraints={{ left: 0, top: 0, right: (window.innerWidth * 80) / 100, bottom: (window.innerHeight * 80) / 100}}>
     <small className="mini-title">&#10024; Motivational Quote </small>
     <Generator quote={quote}/>
