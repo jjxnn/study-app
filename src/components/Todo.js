@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import trashbin from '../img/trashbin.svg'
 import { motion } from 'framer-motion'
 import { v4 as uuidv4 } from 'uuid';
+import '../styles/App.scss';
+
 
   const Note = ({input, handleInputChange, addNote}) => {
     return (

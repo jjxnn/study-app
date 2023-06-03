@@ -65,7 +65,6 @@ const Input = ({clicked, submit}) => {
       <div>
         <label>Pomodoro</label>
         <input name="pomodoro" onChange={handleInputChange} type="number" placeholder="25" min="1"/></div>
-      
       <div>
       <label>Short Break</label>
       <input name="short_break" onChange={handleInputChange} type="number" placeholder="5" min="1"/>

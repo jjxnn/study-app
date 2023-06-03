@@ -5,6 +5,7 @@ import cafe from '../audio/cafe.mp3'
 import rain from '../audio/rain.mp3'
 import keyboard from '../audio/keyboard.wav'
 import { motion } from 'framer-motion'
+import '../styles/App.scss';
 
 const Display = ({sound, playAudio, adjustVolume}) => {
     return(
@@ -17,14 +18,14 @@ const Display = ({sound, playAudio, adjustVolume}) => {
 
 const Sound = ({container}) => {
     const [soundBoard, setSoundBoard] = useState([
-        {id: 1, name: 'Ocean', played: false},
+        {id: 1, name: 'Beach', played: false},
         {id: 2, name: 'Cafe', played: false}, 
         {id: 3, name: 'Rain', played: false},
         {id: 4, name: 'Keyboard', played: false},
         {id: 5, name: 'Forest', played: false},])
 
     const [audios, setnewAudios] = useState({
-        'Ocean': new Audio(ocean), 
+        'Beach': new Audio(ocean), 
         'Forest': new Audio(forest),
         'Cafe': new Audio(cafe),
         'Rain': new Audio(rain),
@@ -46,7 +47,7 @@ const Sound = ({container}) => {
             audios[sound.name].loop = true; 
             audios[sound.name].play()
         } else {
-            e.target.textContent = "Start"
+            e.target.textContent = "Play"
             audios[sound.name].pause()
         }
     }, [soundBoard])

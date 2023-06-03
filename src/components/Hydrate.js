@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import click from '../audio/click.mp3'
 import { motion } from 'framer-motion'
-
+import '../styles/App.scss';
 // 
 const Tracker = ({unit, clicked, intake, goal}) => {         
     return(
@@ -24,14 +24,22 @@ const Settings = ({clicked, unitSelect, unit, userInput, setSettings, timer}) =>
     if(clicked === true) {
         return(
         <form className="user-other-settings">
-            <label>Water Unit</label>
-            <select onChange={unitSelect}>{unit.map((units, index) => <option key={index} className="selection">{units}</option>)}</select>
+            <div>
+              <label>Water Unit</label>
+            <select onChange={unitSelect} className='input'>{unit.map((units, index) => <option key={index} className='input'>{units}</option>)}</select>   
+            </div>
+           
+            <div>
+             <label>Set Time (minutes)</label>
+            <input type="number" name="time" value={timer} min="1" onChange={userInput} className='input'/>   
+            </div>
+            
 
-            <label>Set Time (minutes)</label>
-            <input type="number" name="time" value={timer} min="1" onChange={userInput}/>
-
-            <label>Sound Volume</label>
-            <input type="range" min="1" max="100" onChange={userInput} className='slider'/>
+            <div>
+              <label>Sound Volume</label>
+            <input type="range" min="1" max="100" onChange={userInput} className='slider'/>  
+            </div>
+            
 
             <button className='apply-btn' onClick={setSettings}>Apply</button>
         </form>  

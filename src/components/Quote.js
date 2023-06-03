@@ -5,23 +5,19 @@ import { motion } from 'framer-motion'
 
 const Generator = ({quote}) => {
     return (
-          <div className="quote">"<i>{[quote[1]]}</i>" - {quote[2]}</div>
+          <blockquote className="quote">"<i>{quote.content}</i>" - {quote.author}</blockquote>
       )
 }
 
 
 const Quote = ({container}) => {
   const [quote, setQuote] = useState('')
-  const [clicked, setClicked] = useState(false)
 
   useEffect(() => {
     quoteService.getQuote().then(initialQuote => {
       setQuote(initialQuote)
     })
-
-
-  }, [clicked])
-
+  }, [])
   if(container === true) {
     return(
       <>
