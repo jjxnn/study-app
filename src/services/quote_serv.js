@@ -1,9 +1,10 @@
 import axios from 'axios'
 const baseUrl = 'https://api.quotable.io/random'
 
-const getQuote = () => {
+const getQuote = async () => {
     const request = axios.get(baseUrl)
-    return request.then(res => Object.values(res.data))
+    const res = await request
+    return Object.values(res.data)
 }
 
 export default {getQuote}

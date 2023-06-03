@@ -1,15 +1,14 @@
 
 /* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Asap&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
 
 /* Mixins */ 
 
 @mixin glass {
-	padding: 1rem;
+	// padding: 1rem;
 	background: rgba(255, 255, 255, 0.15);
 	border-radius: 16px;
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(5px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	width: fit-content;
@@ -85,28 +84,32 @@ nav {
 	transform: translateX(-50%);
 }
 .header {
-	color: black;
-	padding: 2rem;
 	background-color: #f3f3f3;
 	box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.36);
 	border-bottom-right-radius: 16px;
 	border-bottom-left-radius: 16px;
+	
+	img {
+		margin: 0.5em;
+		width: 10%;
+	}
+
 }
 
 .nav-bar {
 	list-style-type: none;
-	z-index: 1;
-	padding: 1em;
 	border-radius: 2rem;
 	@include glass;
 	.nav-list {
 		color: white;
 		margin: 1em;
-		padding: 1em;
 		font-family: 'Asap', sans-serif;
-		display: inline;
+		display: inline-block;
 		cursor: pointer;
-		user-select: none;
+	}
+	.nav-icon {
+		display:block;
+		margin: auto;
 	}
 }
 
@@ -130,6 +133,7 @@ nav {
 	width: fit-content;
 	border-radius: 16px;
 	gap: 2em;
+	padding: 1em;
 }
 .add-btn {
 	@include add-btn;
@@ -343,6 +347,7 @@ nav {
 	grid-template-columns: repeat(3, 1fr);
 	gap: 1em;
 	margin-left: auto;
+	padding: 1em;
 }
 
 
@@ -353,6 +358,10 @@ nav {
 
 .not-active {
 	display: none;
+}
+
+.clicked {
+	border-bottom: 1px solid white;
 }
 
 // Exporting variables

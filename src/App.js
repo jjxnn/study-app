@@ -2,7 +2,13 @@ import './styles/App.scss';
 import variables from './styles/variables.scss'
 import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
+import tomato from './img/tomato.svg'
+import water from './img/water-outline.svg'
+import todo from './img/todo.svg'
+import quote from './img/quote.svg'
+import sound from './img/sound.svg'
 import Pomodoro from './components/Pomodoro.js'
+import logo from './img/logo/logo_transparent.png'
 import Quote from './components/Quote.js'
 import Todo from './components/Todo.js'
 import Hydrate from './components/Hydrate.js'
@@ -10,17 +16,20 @@ import Sound from './components/Sound.js'
 
 
 
-const Nav = ({name, clickEvent}) => {
+const Nav = ({name, clickEvent, clicked, img}) => {
   return (
     <>
-    <li className="nav-list" onClick={clickEvent}>{name}</li>
+    
+    <li className="nav-list" onClick={clickEvent}><div className={clicked ? 'clicked' : 'not-clicked'}><img className="nav-icon" src={img}/><span >{name}</span></div></li>
     </>
   )
   }
 
   const Logo = () => {
     return(
-      <header className='header'>Pockeity</header>
+      <header className='header'>
+        <img src={logo}/>
+        </header>
     )
   }
 
@@ -88,8 +97,9 @@ const StyledMain = styled.main`
   background:${props => props.$inputColor};
   height: 100vh;
   background-size: 400% 400%;
-  animation: ${gradient} 12s ease infinite;
-  position: relative; `;
+  animation: ${gradient} 15s ease infinite;
+  position: relative; 
+  `;
 const App = () => {
 
   const [navBar, setNavBar] = useState([
@@ -97,26 +107,31 @@ const App = () => {
       name: 'Pomodoro', 
       id: 1, 
       clicked: false,
+      icon: tomato
     }, 
     {
       name: 'To-do', 
       id: 2, 
       clicked: false,
+      icon: todo
     }, 
     {
       name: 'Quote',
       id: 3, 
       clicked: false,
+      icon: quote
     }, 
     {
       name: 'Hydrate',
       id: 4,
       clicked: false, 
+      icon: water
     }, 
     {
       name: 'Sound', 
       id: 5,
       clicked: false,
+      icon: sound
     }, 
   ])
 
@@ -145,6 +160,8 @@ const App = () => {
             return(
               <Nav name={option.name}
                 key={option.id}
+                clicked={option.clicked}
+                img={option.icon}
                 clickEvent={() => handleContainer(option.id)}/>)})}
           <li className='nav-list'><button className='bg-button' style={{background: userBG}} onClick={openBackground}></button></li>
           
