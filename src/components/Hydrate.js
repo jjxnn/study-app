@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import click from '../audio/click.mp3'
+import alarm from '../audio/alarms.mp3'
 import styled, { keyframes } from 'styled-components'
 import { motion } from 'framer-motion'
 import '../styles/App.scss';
@@ -113,6 +114,7 @@ const Hydrate = ({container}) => {
     
     // Handle buttons - Append the new map array into buttons useState based on the id passed by the onClick events.
     const clickAudio = new Audio(click) 
+    const alarmAudio = new Audio(alarm)
     function handleTab(id) {
         const newArray = buttons.map(btn => {
             if(btn.id === id) {
@@ -132,7 +134,10 @@ const Hydrate = ({container}) => {
         }, 1000)
         return () => clearInterval(interval)
         }
-        
+        if(timer === 0 ) {
+            alarmAudio.play()
+            setTimer(input.time)
+        }
       }, [buttons[0].open, timer])
 
 

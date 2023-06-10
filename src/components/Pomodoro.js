@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef, useCallback} from 'react'
 import click from '../audio/click.mp3'
 import { motion } from 'framer-motion'
-
+import alarm from '../audio/alarms.mp3'
 
 // Task: Optimize the code for Pomodoro.js 
 const Display = ({minute, digit}) => {
@@ -97,7 +97,7 @@ const Pomodoro = ({container}) => {
 
   //Set Time based on user input 
 const clickAudio = new Audio(click)
-
+const alarmAudio = new Audio(alarm)
 const toggleTime = useCallback((time, tab) => {
     setSeconds(time)
     setcurrTab(tab)
@@ -112,7 +112,9 @@ const toggleTime = useCallback((time, tab) => {
     }, 1000)
     return () => clearInterval(interval)
     }
-    
+    if(seconds === 0 ) {
+      alarmAudio.play()
+  }
   }, [clicked, seconds])
 
   
@@ -148,6 +150,7 @@ if(container === true) {
     return (
     <motion.div drag dragConstraints={{ left: 0, top: 0, right: (window.innerWidth * 80) / 100, bottom: (window.innerHeight * 40) / 100}} className="pom-motion">
     <div className="pomodoro-container">
+      
        <div className="container">
     <Timer setTime={toggleTime} sbreak={shortBreak} lbreak={longBreak} pomodoro={pomodoro} currTab={currTab} />
     <Switchtab currTab={currTab} minute={minute} digit={digit_second} seconds={seconds} setTime={toggleTime} sbreak={shortBreak} lbreak={longBreak} pomodoro={pomodoro}/>
