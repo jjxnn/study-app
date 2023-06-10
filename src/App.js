@@ -1,6 +1,7 @@
 import './styles/App.scss';
 import variables from './styles/variables.scss'
-import React, { useState } from 'react'
+import localForage from "localforage";
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import tomato from './img/tomato.svg'
 import water from './img/water-outline.svg'
@@ -8,13 +9,12 @@ import todo from './img/todo.svg'
 import quote from './img/quote.svg'
 import sound from './img/sound.svg'
 import Pomodoro from './components/Pomodoro.js'
+import onboarding from './img/onboarding1.svg'
 import logo from './img/logo/logo_transparent.png'
 import Quote from './components/Quote.js'
 import Todo from './components/Todo.js'
 import Hydrate from './components/Hydrate.js'
 import Sound from './components/Sound.js'
-
-
 
 const Nav = ({name, clickEvent, clicked, img}) => {
   return (
@@ -24,6 +24,55 @@ const Nav = ({name, clickEvent, clicked, img}) => {
     </>
   )
   }
+
+  const Onboarding = () => {
+
+    const [onboard, setonBoard] = useState(false)
+    const [slideshow, setSlideShow] = useState(0)
+    const sum = useRef(0)
+    const openSlide = (click) => {
+      if(slideshow >= 0) {
+        sum.current = slideshow + click;
+        setSlideShow(sum.current)
+      }
+      localForage.setItem('key', 'value').then(function () {
+        return localForage.getItem('key');
+      }).then(function (value) {
+        // we got our value
+      }).catch(function (err) {
+        // we got an error
+      });
+    }
+    if(onboard === false ) {
+      return (
+      <section className='onboarding-overlay'>
+        <button className='next-btn' onClick={() => openSlide(1)}>Next</button>
+        <button className={`prev-btn ${slideshow !== 0 ? 'active' : 'not-active'}`} onClick={() => openSlide(-1)}>Previous</button>
+          <section className={`onboarding-1 ${slideshow === 0 ? 'active' : 'not-active'}`}>
+            <div className='ob-title'>Welcome to Pockeity!</div>
+            <img src={onboarding}/>
+            <section className='ob-desc'>Pockeity is a productivity app, inspired by LifeAt, 
+            that focused on reducing your productivity application clutters by providing all-in-one solution.</section>
+            </section>
+
+        <section className={`onboarding-2 ${slideshow === 1 ? 'active' : 'not-active'}`}>
+          <div className='ob-title'>Widget</div>
+          <section className='ob-desc'>Pockeity includes many widget such as pomodoro, to-do, and ambience sounds so you don't have to open multiple application. 
+          Check out the widget using the navigation bar</section>
+        </section>
+
+        <section className={`onboarding-2 ${slideshow === 2 ? 'active' : 'not-active'}`}>
+          <div className='ob-title'>Customization</div>
+          <section>This is a productivity app, inspired by LifeAt, that focused on helping user  </section>
+        </section>
+    
+        <button onClick={() => setonBoard(true)}>Close</button>
+      </section>
+    )
+    }
+    
+  }
+
 
   const Logo = () => {
     return(
@@ -148,9 +197,9 @@ const App = () => {
     setNavBar(newArray)
   }
   const openBackground = () => {setOpenBG(!openBG)}
- 
   return (
     <>
+    <Onboarding/>
     <StyledMain $inputColor={userBG}>
       <Logo/>
       <nav>
