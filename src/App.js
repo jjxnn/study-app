@@ -63,7 +63,7 @@ const Nav = ({name, clickEvent, clicked, img}) => {
 
         <section className={`onboarding-2 ${slideshow === 2 ? 'active' : 'not-active'}`}>
           <div className='ob-title'>Customization</div>
-          <section>This is a productivity app, inspired by LifeAt, that focused on helping user  </section>
+          <section className='ob-desc'>The application also provides customization to fit your productivity preference such as timer settings and a selection of radient background.</section>
         </section>
     
         <button onClick={() => setonBoard(true)}>Close</button>
