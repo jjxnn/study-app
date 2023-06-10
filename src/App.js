@@ -46,7 +46,7 @@ const Nav = ({name, clickEvent, clicked, img}) => {
     if(onboard === false ) {
       return (
       <section className='onboarding-overlay'>
-        <button className='next-btn' onClick={() => openSlide(1)}>Next</button>
+        <button className={`next-btn ${slideshow !== 2 ? 'active' : 'not-active'}`} onClick={() => openSlide(1)}>Next</button>
         <button className={`prev-btn ${slideshow !== 0 ? 'active' : 'not-active'}`} onClick={() => openSlide(-1)}>Previous</button>
           <section className={`onboarding-1 ${slideshow === 0 ? 'active' : 'not-active'}`}>
             <div className='ob-title'>Welcome to Pockeity!</div>
