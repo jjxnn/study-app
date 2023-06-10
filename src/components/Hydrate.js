@@ -4,6 +4,7 @@ import alarm from '../audio/alarms.mp3'
 import styled, { keyframes } from 'styled-components'
 import { motion } from 'framer-motion'
 import '../styles/App.scss';
+import { isValidInputTimeValue } from '@testing-library/user-event/dist/utils'
 // 
 const ProgressBar = styled(motion.div)`
 background: rgba(255, 255, 255, 0.3);
@@ -153,9 +154,12 @@ const Hydrate = ({container}) => {
             setIntake(intake + parseInt(input.intake))
          }
         setGoal(input.goal)
+        // Reset user in-take value here 
+        setInput({...input, intake: 0})
         handleTab(3)
     }
 
+    console.log(intake)
     const unitSelect = (e) => {
          setUserUnit(e.target.value)
     }
@@ -166,7 +170,6 @@ const Hydrate = ({container}) => {
         setWaterUnit(userUnit)
         handleTab(2)
     }
-
 
     if(container === true) {
         return(<motion.div className="water-cont" drag>
