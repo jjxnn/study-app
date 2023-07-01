@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import trashbin from '../img/trashbin.svg'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { v4 as uuidv4 } from 'uuid';
 import '../styles/App.scss';
 import localforage from 'localforage';
@@ -32,15 +32,16 @@ import localforage from 'localforage';
   const Count = ({noteCount}) => {
     return (
       <>
-        <div className="note-tracker"><span className='number'>{noteCount}</span>  <span className='number-prog'>tasks left</span> </div>  
+        <div className="note-tracker"><span className='number'>{noteCount || 0}</span>  <span className='number-prog'>tasks left</span> </div>  
       </>
     )
   }
 
 const Todo = ({container}) => {
   const [input, setInput] = useState('')
-  const [countNote, setcountNote] = useState(0)
+  const [count, setCount] = useState(0)
   const [notes, setNotes] = useState([])
+  let tracker = count; 
   const handleInputChange = (e) => {
     setInput(e.target.value)
   }
@@ -54,11 +55,10 @@ const Todo = ({container}) => {
 
     localforage.getItem('count').then((value) => {
       if(value !== null) {
-        setcountNote(value)
+        setCount(value)
       }
     })
   },[])
-
   const addNote = (e) => {
     e.preventDefault()
       const noteObject = {
@@ -66,9 +66,11 @@ const Todo = ({container}) => {
         id: uuidv4(),
         checked: false
       }
+      tracker += 1; 
+      setCount(tracker)
       setNotes([...notes, noteObject])
       localforage.setItem('notes', [...notes, noteObject])
-      localforage.setItem('count', countNote)
+      localforage.setItem('count', tracker)
     setInput('')
   }
 
@@ -76,8 +78,11 @@ const Todo = ({container}) => {
   const delNote = (currNote) => {
       // Return a new array that doesn't have the current note. 
       let filterArr = notes.filter(note => note !== currNote)
+      tracker -= 1; 
       setNotes(filterArr)
+      setCount(tracker)
       localforage.setItem('notes', filterArr)
+      localforage.setItem('count', tracker)
   }
 
  const crossNote = (currNote) => {
@@ -87,7 +92,10 @@ const Todo = ({container}) => {
     }
     return crossNote
   })
+  tracker -= 1; 
   localforage.setItem('notes', array)
+  localforage.setItem('count', tracker)
+  setCount(tracker)
   setNotes(array)
 
  }
@@ -99,7 +107,7 @@ const Todo = ({container}) => {
           <small className="mini-title">&#x270D; To-do List</small>
         <Note input={input} handleInputChange={handleInputChange} addNote={addNote}/>
         <List input={notes} deleteNote={delNote} crossNote={crossNote}/>
-        <Count noteCount={countNote}/>
+        <Count noteCount={count}/>
       </div>
       </motion.div>
         
