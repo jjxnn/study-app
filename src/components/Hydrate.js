@@ -4,7 +4,6 @@ import alarm from '../audio/alarms.mp3'
 import styled, { keyframes } from 'styled-components'
 import { motion } from 'framer-motion'
 import '../styles/App.scss';
-import { isValidInputTimeValue } from '@testing-library/user-event/dist/utils'
 // 
 const ProgressBar = styled(motion.div)`
 background: rgba(255, 255, 255, 0.3);

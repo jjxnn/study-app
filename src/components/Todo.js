@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import trashbin from '../img/trashbin.svg'
 import { motion } from 'framer-motion'
 import { v4 as uuidv4 } from 'uuid';
 import '../styles/App.scss';
+import localforage from 'localforage';
 
 
   const Note = ({input, handleInputChange, addNote}) => {
@@ -28,10 +29,10 @@ import '../styles/App.scss';
     )
   }
   
-  const Count = ({noteCount, completeNote}) => {
+  const Count = ({noteCount}) => {
     return (
       <>
-        <small className="note-tracker"> {completeNote} out of {noteCount} task completed</small>    
+        <div className="note-tracker"><span className='number'>{noteCount}</span>  <span className='number-prog'>tasks left</span> </div>  
       </>
     )
   }
@@ -39,11 +40,24 @@ import '../styles/App.scss';
 const Todo = ({container}) => {
   const [input, setInput] = useState('')
   const [countNote, setcountNote] = useState(0)
-  const [completeNote, setcompleteNote] = useState(0)
   const [notes, setNotes] = useState([])
   const handleInputChange = (e) => {
     setInput(e.target.value)
   }
+
+  useEffect(() => {
+    localforage.getItem('notes').then((value) => {
+      if(value !== null) {
+        setNotes(value)
+      }
+    })
+
+    localforage.getItem('count').then((value) => {
+      if(value !== null) {
+        setcountNote(value)
+      }
+    })
+  },[])
 
   const addNote = (e) => {
     e.preventDefault()
@@ -53,19 +67,17 @@ const Todo = ({container}) => {
         checked: false
       }
       setNotes([...notes, noteObject])
-      setcountNote(countNote + 1)
+      localforage.setItem('notes', [...notes, noteObject])
+      localforage.setItem('count', countNote)
     setInput('')
   }
 
 
-  const delNote = (note) => {
-      const currentnote = note;
+  const delNote = (currNote) => {
       // Return a new array that doesn't have the current note. 
-      setNotes(notes.filter(note => note !== currentnote))
-      setcountNote(countNote - 1)
-      if(completeNote >= 1) {
-        setcompleteNote(completeNote - 1)
-      }
+      let filterArr = notes.filter(note => note !== currNote)
+      setNotes(filterArr)
+      localforage.setItem('notes', filterArr)
   }
 
  const crossNote = (currNote) => {
@@ -75,10 +87,9 @@ const Todo = ({container}) => {
     }
     return crossNote
   })
+  localforage.setItem('notes', array)
   setNotes(array)
-  if(currNote.checked === false) {
-    setcompleteNote(completeNote + 1)
-  } else {setcompleteNote(completeNote - 1)}
+
  }
 
   if(container === true) {
@@ -88,7 +99,7 @@ const Todo = ({container}) => {
           <small className="mini-title">&#x270D; To-do List</small>
         <Note input={input} handleInputChange={handleInputChange} addNote={addNote}/>
         <List input={notes} deleteNote={delNote} crossNote={crossNote}/>
-        <Count noteCount={countNote} completeNote={completeNote}/>
+        <Count noteCount={countNote}/>
       </div>
       </motion.div>
         

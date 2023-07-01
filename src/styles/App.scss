@@ -182,8 +182,28 @@ nav {
 	.check-box:checked {
 		background-color: #8ac926;
 	}
-}
 
+	
+}
+.note-tracker {
+	margin-left: 0.5em;
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	.number {
+		display: inline-block;
+		border: 1px solid red;
+		padding: 5px 10px 5px 10px;
+		margin-top: 0.5em;
+		border-radius: 100%;
+		@include glass();
+	}
+
+	.number-prog {
+		display: inline-block;
+		padding-top: 0.5em;
+	}
+}
 .pom-motion {
 	width: fit-content;
 	border-radius: 16px;
